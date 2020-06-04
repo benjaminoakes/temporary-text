@@ -1,7 +1,13 @@
 {
   "name": "Temporary Text",
   "short_name": "Text",
-  "icons": [],
+  "icons": [
+    {
+      "src": "/temporary-text/text.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
