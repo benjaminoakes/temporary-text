@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Temporary text editor">
     <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="/temporary-text/manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <title>Temporary Text</title>
     <style>
     body {
@@ -28,7 +28,7 @@
   </body>
   <script>
   if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/temporary-text/sw.js')
+    navigator.serviceWorker.register('sw.js')
   }
   </script>
 </html>
