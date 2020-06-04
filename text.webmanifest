@@ -7,8 +7,9 @@
   "background_color":"#ffffff",
   "icons": [
     {
-      "src": "text-64.png",
-      "sizes": "64x64",
+      "src": "text-512.png",
+      "sizes": "512x512",
       "type": "image/png"
-    }]
+    
+  ]
 }
