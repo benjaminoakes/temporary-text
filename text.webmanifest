@@ -1,15 +1,14 @@
 {
   "name": "Temporary Text",
   "short_name": "Text",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color":"#ffffff",
   "icons": [
     {
-      "src": "/text.png",
+      "src": "text-64.png",
       "sizes": "64x64",
       "type": "image/png"
-    }
-  ],
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#000000"
+    }]
 }
