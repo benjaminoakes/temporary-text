@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Temporary Text</title>
+    <link rel="manifest" href="text.webmanifest">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Temporary text editor">
     <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="text.webmanifest">
-    <title>Temporary Text</title>
     <style>
     body {
       margin: 0 0;
@@ -28,7 +28,7 @@
   </body>
   <script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function() { console.log("Service worker registered") })
+    navigator.serviceWorker.register('/sw.js').then(function() { console.log("Service worker registered") })
   }
   </script>
 </html>
