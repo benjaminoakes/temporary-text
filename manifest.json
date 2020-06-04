@@ -3,12 +3,12 @@
   "short_name": "Text",
   "icons": [
     {
-      "src": "/temporary-text/text.png",
+      "src": "/text.png",
       "sizes": "64x64",
       "type": "image/png"
     }
   ],
-  "start_url": "/temporary-text/index.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#000000"
