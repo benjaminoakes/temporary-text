@@ -13,6 +13,10 @@
       height: 100%;
     }
 
+    select {
+      width: 100%;
+    }
+
     textarea {
       width: 100%;
       height: 100vh;
@@ -22,13 +26,61 @@
   <body>
     <main>
       <form>
-        <textarea autofocus></textarea>
+        <select onchange="handleCommandEvent(event)">
+          <option disabled selected>Command</option>
+          <option value="countCharacters">Count Characters</option>
+          <option value="countLines">Count Lines</option>
+          <option value="filter">Filter</option>
+          <option value="replace">Replace</option>
+        </select>
+        <textarea autofocus id="text"></textarea>
       </form>
     </main>
   </body>
   <script>
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js");
+  }
+
+  class Commands {
+    static countLines(lines) {
+      alert(`Lines: ${lines.length}`)
+
+      return lines
+    }
+    
+    static countCharacters(lines) {
+      let characters = lines.reduce((sum, line) => sum + line.length, 0)
+
+      alert(`Characters: ${characters}`)
+
+      return lines
+    }
+
+    static filter(lines) {
+      let pattern = prompt("Pattern?")
+
+      return lines.filter((line) => line.match(pattern))
+    }
+
+    static replace(lines) {
+      let pattern = prompt("Pattern?")
+      let replacement = prompt("Replacement?")
+
+      return lines.map((line) => line.replace(pattern, replacement))
+    }
+  }
+
+  function handleCommandEvent(event) {
+    let commandName = event.target.value
+    let textarea = document.getElementById("text")
+
+    let command = Commands[commandName]
+    let lines = textarea.value.split("\n")
+
+    let transformed = command(lines)
+
+    textarea.value = transformed.join("\n")
   }
   </script>
 </html>
