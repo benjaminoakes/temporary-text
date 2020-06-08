@@ -31,7 +31,10 @@
           <option value="countCharacters">Count Characters</option>
           <option value="countLines">Count Lines</option>
           <option value="filter">Filter</option>
+          <option value="filterInverse">Filter Inverse</option>
           <option value="replace">Replace</option>
+          <option value="reverse">Reverse</option>
+          <option value="sort">Sort</option>
         </select>
         <textarea autofocus id="text"></textarea>
       </form>
@@ -63,11 +66,25 @@
       return lines.filter((line) => line.match(pattern))
     }
 
+    static filterInverse(lines) {
+      let pattern = prompt("Pattern?")
+
+      return lines.filter((line) => !line.match(pattern))
+    }
+
     static replace(lines) {
       let pattern = prompt("Pattern?")
       let replacement = prompt("Replacement?")
 
       return lines.map((line) => line.replace(pattern, replacement))
+    }
+
+    static reverse(lines) {
+      return lines.reverse()
+    }
+
+    static sort(lines) {
+      return lines.sort()
     }
   }
 
