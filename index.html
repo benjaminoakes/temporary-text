@@ -32,9 +32,11 @@
           <option value="countLines">Count Lines</option>
           <option value="filter">Filter</option>
           <option value="filterInverse">Filter Inverse</option>
+          <option value="join">Join</option>
           <option value="replace">Replace</option>
           <option value="reverse">Reverse</option>
           <option value="sort">Sort</option>
+          <option value="split">Split</option>
         </select>
         <textarea autofocus id="text"></textarea>
       </form>
@@ -72,6 +74,12 @@
       return lines.filter((line) => !line.match(pattern))
     }
 
+    static join(lines) {
+        let joiner = prompt("Joiner?")
+
+        return lines.join(joiner).split("\n")
+    }
+
     static replace(lines) {
       let pattern = prompt("Pattern?")
       let replacement = prompt("Replacement?")
@@ -85,6 +93,12 @@
 
     static sort(lines) {
       return lines.sort()
+    }
+
+    static split(lines) {
+        let pattern = prompt("Pattern?") 
+
+        return lines.join("\n").split(pattern)
     }
   }
 
