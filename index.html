@@ -42,6 +42,9 @@
           <option value="split">Split</option>
           <option value="toLowerCase">To Lower Case</option>
           <option value="toUpperCase">To Upper Case</option>
+          <option value="trim">Trim</option>
+          <option value="trimEnd">Trim End</option>
+          <option value="trimStart">Trim Start</option>
         </select>
         <textarea autofocus id="text"></textarea>
       </form>
@@ -124,6 +127,18 @@
 
     static toUpperCase(lines) {
         return lines.map((line) => line.toUpperCase())
+    }
+
+    static trim(lines) {
+        return lines.map((line) => line.trim())
+    }
+
+    static trimEnd(lines) {
+        return lines.map((line) => line.trimEnd())
+    }
+
+    static trimStart(lines) {
+        return lines.map((line) => line.trimStart())
     }
   }
 
