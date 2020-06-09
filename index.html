@@ -38,6 +38,7 @@
           <option value="filterInverse">Filter Inverse</option>
           <option value="join">Join</option>
           <option value="replace">Replace</option>
+          <option value="replaceRegExpGlobally">Replace RegExp Globally</option>
           <option value="reverse">Reverse</option>
           <option value="sortLexically">Sort Lexically</option>
           <option value="sortNumerically">Sort Numerically</option>
@@ -115,6 +116,14 @@
       let replacement = prompt("Replacement?")
 
       return lines.map((line) => line.replace(pattern, replacement))
+    }
+
+    static replaceRegExpGlobally(lines) {
+        let pattern = prompt("Pattern?")
+        let replacement = prompt("Replacement?")
+        let regExp = new RegExp(pattern, "g")
+
+        return lines.map((line) => line.replace(regExp, replacement))
     }
 
     static reverse(lines) {
