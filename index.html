@@ -30,6 +30,8 @@
           <option disabled selected>Command</option>
           <option value="countCharacters">Count Characters</option>
           <option value="countLines">Count Lines</option>
+          <option value="concatBefore">Concat Before</option>
+          <option value="concatAfter">Concat After</option>
           <option value="everyOtherEven">Every Other (Even)</option>
           <option value="everyOtherOdd">Every Other (Odd)</option>
           <option value="filter">Filter</option>
@@ -56,6 +58,18 @@
   }
 
   class Commands {
+    static concatAfter(lines) {
+      let text = prompt("Text?")
+
+      return lines.map((line) => line.concat(text))
+    }
+
+    static concatBefore(lines) {
+      let text = prompt("Text?")
+
+      return lines.map((line) => text.concat(line))
+    }
+
     static countLines(lines) {
       alert(`Lines: ${lines.length}`)
 
