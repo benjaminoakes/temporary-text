@@ -37,7 +37,8 @@
           <option value="join">Join</option>
           <option value="replace">Replace</option>
           <option value="reverse">Reverse</option>
-          <option value="sort">Sort</option>
+          <option value="sortLexically">Sort Lexically</option>
+          <option value="sortNumerically">Sort Numerically</option>
           <option value="split">Split</option>
           <option value="toLowerCase">To Lower Case</option>
           <option value="toUpperCase">To Upper Case</option>
@@ -103,8 +104,12 @@
       return lines.reverse()
     }
 
-    static sort(lines) {
+    static sortLexically(lines) {
       return lines.sort()
+    }
+
+    static sortNumerically(lines) {
+      return lines.sort((left, right) => parseInt(left, 10) - parseInt(right, 10))
     }
 
     static split(lines) {
