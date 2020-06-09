@@ -30,6 +30,8 @@
           <option disabled selected>Command</option>
           <option value="countCharacters">Count Characters</option>
           <option value="countLines">Count Lines</option>
+          <option value="everyOtherEven">Every Other (Even)</option>
+          <option value="everyOtherOdd">Every Other (Odd)</option>
           <option value="filter">Filter</option>
           <option value="filterInverse">Filter Inverse</option>
           <option value="join">Join</option>
@@ -60,6 +62,14 @@
       alert(`Characters: ${characters}`)
 
       return lines
+    }
+
+    static everyOtherEven(lines) {
+        return lines.filter((line, index) => index % 2 == 0)
+    }
+
+    static everyOtherOdd(lines) {
+        return lines.filter((line, index) => index % 2 == 1)
     }
 
     static filter(lines) {
