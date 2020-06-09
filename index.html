@@ -39,6 +39,8 @@
           <option value="reverse">Reverse</option>
           <option value="sort">Sort</option>
           <option value="split">Split</option>
+          <option value="toLowerCase">To Lower Case</option>
+          <option value="toUpperCase">To Upper Case</option>
         </select>
         <textarea autofocus id="text"></textarea>
       </form>
@@ -109,6 +111,14 @@
         let pattern = prompt("Pattern?") 
 
         return lines.join("\n").split(pattern)
+    }
+
+    static toLowerCase(lines) {
+        return lines.map((line) => line.toLowerCase())
+    }
+
+    static toUpperCase(lines) {
+        return lines.map((line) => line.toUpperCase())
     }
   }
 
