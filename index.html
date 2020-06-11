@@ -186,10 +186,9 @@
     let commandName = event.target.value
     let textarea = document.getElementById("text")
 
-    let command = Commands[commandName]
     let lines = textarea.value.split("\n")
 
-    let transformed = command(lines)
+    let transformed = Commands[commandName](lines)
 
     textarea.value = transformed.join("\n")
   }
