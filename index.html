@@ -97,7 +97,7 @@
     }
 
     static extractUrls(lines) {
-        return lines.join("\n").match(/\bhttps?:\/\/\S+/g)
+        return lines.join("\n").match(/\bhttps?:\/\/\S+/g) ?? []
     }
 
     static filter(lines) {
