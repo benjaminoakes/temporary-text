@@ -34,9 +34,11 @@
           <option value="concatAfter">Concat After</option>
           <option value="everyOtherEven">Every Other (Even)</option>
           <option value="everyOtherOdd">Every Other (Odd)</option>
+          <option value="extractUrls">Extract URLs</option>
           <option value="filter">Filter</option>
           <option value="filterInverse">Filter Inverse</option>
           <option value="join">Join</option>
+          <option value="openUrls">Open URLs</option>
           <option value="replace">Replace</option>
           <option value="replaceRegExpGlobally">Replace RegExp Globally</option>
           <option value="reverse">Reverse</option>
@@ -94,6 +96,10 @@
         return lines.filter((line, index) => index % 2 == 1)
     }
 
+    static extractUrls(lines) {
+        return lines.join("\n").match(/\bhttps?:\/\/\S+/g)
+    }
+
     static filter(lines) {
       let pattern = prompt("Pattern?")
 
@@ -110,6 +116,10 @@
         let joiner = prompt("Joiner?")
 
         return lines.join(joiner).split("\n")
+    }
+
+    static openUrls(lines) {
+        this.extractUrls(lines).forEach((url) => window.open(url))
     }
 
     static replace(lines) {
