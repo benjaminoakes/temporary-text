@@ -183,5 +183,16 @@
 
     textarea.value = transformed.join("\n")
   }
+
+  function joinSearchParams(url) {
+    let parsedUrl = new URL(url)
+    let allParameters = Array.from(parsedUrl.searchParams.values())
+    
+    return allParameters.join("\n\n")
+  }
+
+  let textarea = document.getElementById("text")
+  let browserUrl = window.location.toString()
+  textarea.value = joinSearchParams(browserUrl)
   </script>
 </html>
