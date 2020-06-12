@@ -41,6 +41,7 @@
           <option value="openUrls">Open URLs</option>
           <option value="replace">Replace</option>
           <option value="replaceRegExpGlobally">Replace RegExp Globally</option>
+          <option value="share">Share</option>
           <option value="reverse">Reverse</option>
           <option value="sortLexically">Sort Lexically</option>
           <option value="sortNumerically">Sort Numerically</option>
@@ -139,6 +140,19 @@
 
     static reverse(lines) {
       return lines.reverse()
+    }
+
+    static async share(lines) {
+      if (navigator.share) {
+        try {
+            let text = lines.join("\n")
+            await navigator.share({ text })
+        } catch (error) {
+            alert(`Error when sharing: ${error.message}`)
+        }
+      } else {
+        alert("Sharing is not supported")
+      }
     }
 
     static sortLexically(lines) {
