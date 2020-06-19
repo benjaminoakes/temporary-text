@@ -34,6 +34,7 @@
           <option value="concatAfter">Concat After</option>
           <option value="everyOtherEven">Every Other (Even)</option>
           <option value="everyOtherOdd">Every Other (Odd)</option>
+          <option value="executeJavaScript">Execute JavaScript</option>
           <option value="extractUrls">Extract URLs</option>
           <option value="filter">Filter</option>
           <option value="filterInverse">Filter Inverse</option>
@@ -95,6 +96,10 @@
 
     static everyOtherOdd(lines) {
         return lines.filter((line, index) => index % 2 == 1)
+    }
+
+    static executeJavaScript(lines) {
+        eval(lines.join())
     }
 
     static extractUrls(lines) {
