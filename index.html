@@ -59,168 +59,173 @@
     </main>
   </body>
   <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js");
+/* global alert, prompt */
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+}
+
+class Commands {
+  static concatAfter (lines) {
+    const text = prompt('Text?')
+
+    return lines.map((line) => line.concat(text))
   }
 
-  class Commands {
-    static concatAfter(lines) {
-      let text = prompt("Text?")
+  static concatBefore (lines) {
+    const text = prompt('Text?')
 
-      return lines.map((line) => line.concat(text))
-    }
+    return lines.map((line) => text.concat(line))
+  }
 
-    static concatBefore(lines) {
-      let text = prompt("Text?")
+  static countLines (lines) {
+    alert(`Lines: ${lines.length}`)
 
-      return lines.map((line) => text.concat(line))
-    }
+    return lines
+  }
 
-    static countLines(lines) {
-      alert(`Lines: ${lines.length}`)
+  static countCharacters (lines) {
+    const characters = lines.reduce((sum, line) => sum + line.length, 0)
 
-      return lines
-    }
-    
-    static countCharacters(lines) {
-      let characters = lines.reduce((sum, line) => sum + line.length, 0)
+    alert(`Characters: ${characters}`)
 
-      alert(`Characters: ${characters}`)
+    return lines
+  }
 
-      return lines
-    }
+  static everyOtherEven (lines) {
+    return lines.filter((line, index) => index % 2 === 0)
+  }
 
-    static everyOtherEven(lines) {
-        return lines.filter((line, index) => index % 2 == 0)
-    }
+  static everyOtherOdd (lines) {
+    return lines.filter((line, index) => index % 2 === 1)
+  }
 
-    static everyOtherOdd(lines) {
-        return lines.filter((line, index) => index % 2 == 1)
-    }
+  static executeJavaScript (lines) {
+    eval(lines.join()) // eslint-disable-line no-eval
+  }
 
-    static executeJavaScript(lines) {
-        eval(lines.join())
-    }
+  static extractUrls (lines) {
+    // Consider nullish coalescing ?? after standardjs supports it.
+    // Currently TC39 Stage 4, so it's valid ES2020.
+    return lines.join('\n').match(/\bhttps?:\/\/\S+/g) || []
+  }
 
-    static extractUrls(lines) {
-        return lines.join("\n").match(/\bhttps?:\/\/\S+/g) ?? []
-    }
+  static filter (lines) {
+    const pattern = prompt('Pattern?')
 
-    static filter(lines) {
-      let pattern = prompt("Pattern?")
+    return lines.filter((line) => line.match(pattern))
+  }
 
-      return lines.filter((line) => line.match(pattern))
-    }
+  static filterInverse (lines) {
+    const pattern = prompt('Pattern?')
 
-    static filterInverse(lines) {
-      let pattern = prompt("Pattern?")
+    return lines.filter((line) => !line.match(pattern))
+  }
 
-      return lines.filter((line) => !line.match(pattern))
-    }
+  static join (lines) {
+    const joiner = prompt('Joiner?')
 
-    static join(lines) {
-        let joiner = prompt("Joiner?")
+    return lines.join(joiner).split('\n')
+  }
 
-        return lines.join(joiner).split("\n")
-    }
+  static openUrls (lines) {
+    this.extractUrls(lines).forEach((url) => window.open(url))
+  }
 
-    static openUrls(lines) {
-        this.extractUrls(lines).forEach((url) => window.open(url))
-    }
+  static replace (lines) {
+    const pattern = prompt('Pattern?')
+    const replacement = prompt('Replacement?')
 
-    static replace(lines) {
-      let pattern = prompt("Pattern?")
-      let replacement = prompt("Replacement?")
+    return lines.map((line) => line.replace(pattern, replacement))
+  }
 
-      return lines.map((line) => line.replace(pattern, replacement))
-    }
+  static replaceRegExpGlobally (lines) {
+    const pattern = prompt('Pattern?')
+    const replacement = prompt('Replacement?')
+    const regExp = new RegExp(pattern, 'g')
 
-    static replaceRegExpGlobally(lines) {
-        let pattern = prompt("Pattern?")
-        let replacement = prompt("Replacement?")
-        let regExp = new RegExp(pattern, "g")
+    return lines.map((line) => line.replace(regExp, replacement))
+  }
 
-        return lines.map((line) => line.replace(regExp, replacement))
-    }
+  static reverse (lines) {
+    return lines.reverse()
+  }
 
-    static reverse(lines) {
-      return lines.reverse()
-    }
-
-    static async share(lines) {
-      if (navigator.share) {
-        try {
-            let text = lines.join("\n")
-            await navigator.share({ text })
-        } catch (error) {
-            alert(`Error when sharing: ${error.message}`)
-        }
-      } else {
-        alert("Sharing is not supported")
+  static async share (lines) {
+    if (navigator.share) {
+      try {
+        const text = lines.join('\n')
+        await navigator.share({ text })
+      } catch (error) {
+        alert(`Error when sharing: ${error.message}`)
       }
-    }
-
-    static sortLexically(lines) {
-      return lines.sort()
-    }
-
-    static sortNumerically(lines) {
-      return lines.sort((left, right) => parseInt(left, 10) - parseInt(right, 10))
-    }
-
-    static split(lines) {
-        let pattern = prompt("Pattern?") 
-
-        return lines.join("\n").split(pattern)
-    }
-
-    static toLowerCase(lines) {
-        return lines.map((line) => line.toLowerCase())
-    }
-
-    static toUpperCase(lines) {
-        return lines.map((line) => line.toUpperCase())
-    }
-
-    static trim(lines) {
-        return lines.map((line) => line.trim())
-    }
-
-    static trimEnd(lines) {
-        return lines.map((line) => line.trimEnd())
-    }
-
-    static trimStart(lines) {
-        return lines.map((line) => line.trimStart())
-    }
-
-    static unique(lines) {
-        let set = new Set(lines)
-
-        return Array.from(set.keys())
+    } else {
+      alert('Sharing is not supported')
     }
   }
 
-  function handleCommandEvent(event) {
-    let commandName = event.target.value
-    let textarea = document.getElementById("text")
-
-    let lines = textarea.value.split("\n")
-
-    let transformed = Commands[commandName](lines)
-
-    textarea.value = transformed.join("\n")
+  static sortLexically (lines) {
+    return lines.sort()
   }
 
-  function joinSearchParams(url) {
-    let parsedUrl = new URL(url)
-    let allParameters = Array.from(parsedUrl.searchParams.values())
-    
-    return allParameters.join("\n\n")
+  static sortNumerically (lines) {
+    return lines.sort((left, right) => parseInt(left, 10) - parseInt(right, 10))
   }
 
-  let textarea = document.getElementById("text")
-  let browserUrl = window.location.toString()
-  textarea.value = joinSearchParams(browserUrl)
+  static split (lines) {
+    const pattern = prompt('Pattern?')
+
+    return lines.join('\n').split(pattern)
+  }
+
+  static toLowerCase (lines) {
+    return lines.map((line) => line.toLowerCase())
+  }
+
+  static toUpperCase (lines) {
+    return lines.map((line) => line.toUpperCase())
+  }
+
+  static trim (lines) {
+    return lines.map((line) => line.trim())
+  }
+
+  static trimEnd (lines) {
+    return lines.map((line) => line.trimEnd())
+  }
+
+  static trimStart (lines) {
+    return lines.map((line) => line.trimStart())
+  }
+
+  static unique (lines) {
+    const set = new Set(lines)
+
+    return Array.from(set.keys())
+  }
+}
+
+function handleCommandEvent (event) {
+  const commandName = event.target.value
+  const textarea = document.getElementById('text')
+
+  const lines = textarea.value.split('\n')
+
+  const transformed = Commands[commandName](lines)
+
+  textarea.value = transformed.join('\n')
+}
+
+function joinSearchParams (url) {
+  const parsedUrl = new URL(url)
+  const allParameters = Array.from(parsedUrl.searchParams.values())
+
+  return allParameters.join('\n\n')
+}
+
+const textarea = document.getElementById('text')
+const browserUrl = window.location.toString()
+textarea.value = joinSearchParams(browserUrl)
+
   </script>
 </html>
