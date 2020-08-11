@@ -48,6 +48,7 @@
           <option value="sortNumerically">Sort Numerically</option>
           <option value="split">Split</option>
           <option value="toLowerCase">To Lower Case</option>
+          <option value="toTitleCase">To Title Case</option>
           <option value="toUpperCase">To Upper Case</option>
           <option value="trim">Trim</option>
           <option value="trimEnd">Trim End</option>
@@ -184,6 +185,18 @@ class Commands {
 
   static toUpperCase (lines) {
     return lines.map((line) => line.toUpperCase())
+  }
+
+  static toTitleCase (lines) {
+    function titlecase ([first, ...rest]) {
+      return [first.toUpperCase(), rest].flat().join('')
+    }
+
+    function titleize (string) {
+      return string.split(/[-_ ]/).map(titlecase).join(' ')
+    }
+
+    return lines.map(titleize)
   }
 
   static trim (lines) {
