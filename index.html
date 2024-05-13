@@ -32,6 +32,7 @@
           <option value="countLines">Count Lines</option>
           <option value="concatBefore">Concat Before</option>
           <option value="concatAfter">Concat After</option>
+          <option value="download">Download</option>
           <option value="everyOtherEven">Every Other (Even)</option>
           <option value="everyOtherOdd">Every Other (Odd)</option>
           <option value="executeJavaScript">Execute JavaScript</option>
@@ -91,6 +92,23 @@ class Commands {
     alert(`Characters: ${characters}`)
 
     return lines
+  }
+
+  static download (lines) {
+    var text = lines.join("\n")
+    
+    var element = document.createElement('a')
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
+    element.setAttribute('download', 'ouput.txt')
+
+    element.style.display = 'none'
+    document.body.appendChild(element)
+
+    element.click()
+
+    document.body.removeChild(element)
+    
+    return text
   }
 
   static everyOtherEven (lines) {
